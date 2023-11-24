@@ -1,0 +1,21 @@
+{
+    "youtube": [
+        {
+            "id": 1,
+            "email": "clarence",
+            "password": "432432432"
+        },
+        {
+            "id": 2,
+            "email": "xian",
+            "password": -9050102230239995560
+        }
+    ],
+    "linkedin": [
+        {
+            "id": 1,
+            "email": "zactec114@gmail.com",
+            "password": -1007536145158319680
+        }
+    ]
+}
