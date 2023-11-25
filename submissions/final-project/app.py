@@ -2,7 +2,12 @@ from flask import Flask, render_template
 import sqlite3
 
 app = Flask(__name__)
-# app.config['DB_NAME'] = 'data.db'
+app.config['DB_NAME'] = 'accounts.db'
+
+def get_db():
+    db = sqlite3.connect(app.config["DB_NAME"])
+    db.row_factory = sqlite3.Row
+    return db
 
 @app.route('/')
 def index():
@@ -12,7 +17,9 @@ def index():
 @app.route('/accounts')
 def accounts():
     title='Accounts'
-    return render_template('./accounts.html', title=title)
+    conn = get_db()
+    accounts = conn.execute("SELECT * FROM accounts").fetchall()
+    return render_template('./accounts.html', title=title, accounts=accounts)
 
 @app.route('/create-account')
 def create_accounts():

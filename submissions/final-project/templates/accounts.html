@@ -9,33 +9,17 @@
             </tr>
         </thead>
         <tbody>
+            {% for account in accounts %}
             <tr>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <td>{{ account.email}}</td>
+                <td>{{ account.password}}</td>
+                <td>{{ account.website}}</td>
                 <td>
                     <button class="btn btn-secondary fw-bold">EDIT</button>
                     <button class="btn btn-danger fw-bold">DELETE</button>
                 </td>
             </tr>
-            <tr>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>
-                    <button class="btn btn-secondary fw-bold">EDIT</button>
-                    <button class="btn btn-danger fw-bold">DELETE</button>
-                </td>
-            </tr>
-            <tr>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-                <td>
-                    <button class="btn btn-secondary fw-bold">EDIT</button>
-                    <button class="btn btn-danger fw-bold">DELETE</button>
-                </td>
-            </tr>
+            {% endfor %}
         </tbody>
     </table>
 {% include './components/footer.html' %}
