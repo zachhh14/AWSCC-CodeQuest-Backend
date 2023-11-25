@@ -6,10 +6,17 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('./index.html')
+    title='Welcome'
+    return render_template('./index.html', title=title)
 
 @app.route('/accounts')
 def accounts():
-    return render_template('./accounts.html')
+    title='Accounts'
+    return render_template('./accounts.html', title=title)
+
+@app.route('/create-account')
+def create_accounts():
+    title='Create Account'
+    return render_template('./create-account.html', title=title)
 
 app.run()
