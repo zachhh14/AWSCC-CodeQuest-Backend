@@ -1,0 +1,49 @@
+{% include './components/header.html' %}
+    {% with messages = get_flashed_messages() %}  
+        {% if messages %}  
+            {% for message in messages %}  
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}  
+        {% endif %}  
+    {% endwith %}  
+    <table class="table text-center table-striped table-bordered table-hover">
+        <thead>
+            <tr >
+                <th class="w-25 bg-dark text-white">WEBSITE</th>
+                <th class="w-25 bg-dark text-white">EMAIL</th>
+                <th class="w-25 bg-dark text-white">PASSWORD</th>
+                <th class="bg-dark text-white">ACTION</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for account in accounts %}
+            <tr>
+                <td>{{ account.website}}</td>
+                <td>{{ account.email}}</td>
+                <td>{{ account.password}}</td>
+                <td>
+                    <a 
+                        href="{{ url_for('edit_account', id=account.id) }}" 
+                        class="text-decoration-none"
+                    >
+                        <button class="btn btn-secondary fw-bold">EDIT</button>
+                    </a>
+                    <a 
+                        href="{{ url_for('delete_account', id=account.id) }}" 
+                        class="text-decoration-none"
+                    >
+                        <button class="btn btn-danger fw-bold">DELETE</button>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-end">
+        <a href="{{url_for('create_accounts')}}">
+            <button class="btn btn-success">Create Account</button>
+        </a>
+    </div>
+{% include './components/footer.html' %}
