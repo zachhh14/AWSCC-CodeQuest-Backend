@@ -1,17 +1,34 @@
 {% include './components/header.html' %}
-    <form action="/update-account" method="POST">
-        <input type="text" name="id" >
+    <form action="{{ url_for('update_account', id=account.id )}}" method="POST">
+        <input type="hidden" name="id" value='{{ account.id }}'>
         <div class="mb-3">
             <label class="form-label">Website</label>
-            <input type="text" class="form-control" id="website" name="website">
+            <input 
+                type="text" 
+                class="form-control" 
+                id="website" 
+                name="website" 
+                value="{{ account.website }}"
+            >
         </div>
         <div class="mb-3">
             <label class="form-label">Email address</label>
-            <input type="email" class="form-control" name="email">
+            <input 
+                type="email" 
+                class="form-control" 
+                name="email"
+                value="{{ account.email }}"
+            >
         </div>
         <div class="mb-3">
             <label class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password">
+            <input 
+                type="text" 
+                class="form-control" 
+                id="password" 
+                name="password"
+                value="{{ account.password }}"
+            >
         </div>
         <div class="d-flex justify-content-end">
             <button type="reset" class="btn btn-danger me-2">Reset</button>

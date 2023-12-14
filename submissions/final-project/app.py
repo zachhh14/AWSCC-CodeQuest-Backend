@@ -1,10 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['DB_NAME'] = 'accounts.db'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///accounts.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = 'ZACH'
 
 db = SQLAlchemy(app)
 
@@ -53,7 +54,33 @@ def add_accounts():
     new_account = Account(website=website, email=email, password=password)
     db.session.add(new_account)
     db.session.commit()
+    flash("Account added succesfully!")  
     
+    return redirect(url_for('accounts'))
+
+@app.route('/update-account/<int:id>', methods=['GET','POSt'])
+def update_account(id):
+    account = Account.query.get_or_404(id)
+
+    if request.method == 'POST':
+        account.website = request.form.get('website')
+        account.email = request.form.get('email')
+        account.password = request.form.get('password')
+        db.session.commit()
+        flash("Account updated succesfully!")  
+
+        return redirect(url_for('accounts'))
+    
+    return render_template('edit-account.html', account=account)
+
+@app.route('/delete-account/<int:id>', methods=['GET', 'POST'])
+def delete_account(id):
+    account = Account.query.get_or_404(id)
+
+    db.session.delete(account)
+    db.session.commit()
+    flash("Account deleted succesfully!")  
+
     return redirect(url_for('accounts'))
 
 if __name__ == '__main__':
