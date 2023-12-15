@@ -21,7 +21,7 @@ class Account(db.Model):
 
 @app.route('/')
 def index():
-    title = 'Welcome'
+    title = 'Account Manager'
 
     return render_template('./index.html', title=title)
 
